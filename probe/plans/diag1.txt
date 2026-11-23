@@ -1,5 +1,3 @@
 variant v1
-build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechLeray
-build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.Linear
-build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.CechFunctor
 build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.NaturalLeray
+sh lake env lean --json --profile -Dprofiler.threshold=5 --tstack=400000 -DmaxHeartbeats=4000000 probe/scratch/S5.lean
