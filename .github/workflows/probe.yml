@@ -35,8 +35,6 @@ jobs:
       - name: Machine
         run: |
           nproc; free -g; df -h /; lscpu | grep 'Model name'
-          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
-          df -h /
       - name: Install elan
         run: |
           curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o "$RUNNER_TEMP/elan-init.sh"
@@ -60,10 +58,25 @@ jobs:
         with:
           path: .lake/packages
           key: pkgs-v1-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}
+      - name: Restore build
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: build-v1-${{ matrix.plan }}-${{ github.sha }}
+          restore-keys: |
+            build-v1-${{ matrix.plan }}-
+            build-v1-
       - name: Run plan
         run: |
           lake --version
           bash probe/run.sh probe/plans/${{ matrix.plan }}.txt
+      - name: Save build
+        if: always()
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: build-v1-${{ matrix.plan }}-${{ github.sha }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -1,6 +1,0 @@
-build +GroundTheory.ArithmeticGeometry.SchemeCohomology.SheafH
-build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechLeray
-build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.Linear
-build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.CechFunctor
-build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.NaturalLeray
-build +GroundTheory.ArithmeticGeometry.SchemeCohomology.SheafHOver
