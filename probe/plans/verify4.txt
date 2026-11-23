@@ -1,3 +1,2 @@
 sh sed -i /^weakLeanArgs/d lakefile.toml
-sh lake build $(sed s/^/+/ probe/targets/verify4.txt | tr "
-" " ")
+sh lake build $(sed s/^/+/ probe/targets/verify4.txt | tr "\n" " ")
