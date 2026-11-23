@@ -1,0 +1,7 @@
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProjectiveCohomology.PSpaceFinite
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProjectiveCohomology.SerrePAux
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.CokernelCoherent
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.FormalTower
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.SheafHEquiv
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.AcyclicLeray
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.CohFinite

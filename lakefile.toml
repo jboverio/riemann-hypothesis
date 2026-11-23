@@ -5,6 +5,7 @@ name = "tree"
 srcDir = "src"
 defaultTargets = ["CompanionTheory", "Development", "Formalism", "GroundTheory", "GroundTheoryFields", "Lemmata", "PositivityTheory", "ReciprocityTheory", "Supplements", "Main"]
 moreLeanArgs = ["--tstack=400000"]
+weakLeanArgs = ["--profile", "-Dprofiler.threshold=50"]
 
 [leanOptions]
 autoImplicit = false
