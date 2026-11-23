@@ -52,6 +52,10 @@ public import Mathlib.Topology.Sheaves.LocallySurjective
 
 set_option maxSynthPendingDepth 1
 
+-- Use `sheafIsAbelian`, the instance Mathlib's `Sheaf.H` API is stated for, instead of the
+-- definitionally equal `TopCat.Sheaf.instAbelian`: the kernel is slow to identify the two.
+attribute [-instance] TopCat.Sheaf.instAbelian
+
 namespace GroundTheory.Arith.SchemeCoh
 
 noncomputable section
@@ -61,6 +65,13 @@ open CategoryTheory Opposite TopologicalSpace Limits Abelian
 universe w w' u
 
 variable {X : TopCat.{u}}
+
+/-- Sheafification of abelian presheaves on a space, as a named instance. Instance search
+otherwise returns a long proof term, which Lean replaces by a new auxiliary constant inside each
+definition, and the kernel is slow to match that constant against the definition's type. -/
+instance instHasSheafifyOpens (X : TopCat.{u}) :
+    HasSheafify (Opens.grothendieckTopology X) AddCommGrpCat.{u} :=
+  inferInstance
 
 section Groups
 

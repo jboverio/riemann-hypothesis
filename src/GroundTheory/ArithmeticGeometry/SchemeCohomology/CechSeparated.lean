@@ -49,6 +49,10 @@ import Mathlib.Tactic.NormNum.RealSqrt
 
 set_option maxSynthPendingDepth 1
 
+-- Use `sheafIsAbelian`, the instance Mathlib's `Sheaf.H` API is stated for, instead of the
+-- definitionally equal `TopCat.Sheaf.instAbelian`: the kernel is slow to identify the two.
+attribute [-instance] TopCat.Sheaf.instAbelian
+
 namespace GroundTheory.Arith.SchemeCoh
 
 open CategoryTheory Opposite TopologicalSpace AlgebraicGeometry
@@ -90,6 +94,11 @@ end Transport
 section Scheme
 
 variable {X : Scheme.{u}}
+
+/-- `instHasSheafifyOpens` for the underlying space of a scheme. -/
+instance instHasSheafifySchemeOpens (X : Scheme.{u}) :
+    HasSheafify (Opens.grothendieckTopology X.toTopCat) AddCommGrpCat.{u} :=
+  inferInstance
 
 noncomputable abbrev modulesAb (F : X.Modules) :
     Sheaf (Opens.grothendieckTopology X.toTopCat) AddCommGrpCat.{u} :=
