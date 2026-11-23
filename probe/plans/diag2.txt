@@ -1,2 +1,0 @@
-build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.NaturalLeray
-sh lake env lean --json --profile -Dprofiler.threshold=5 --tstack=400000 -DmaxHeartbeats=4000000 probe/scratch/S4.lean
