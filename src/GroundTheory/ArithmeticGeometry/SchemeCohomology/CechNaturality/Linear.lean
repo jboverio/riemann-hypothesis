@@ -46,6 +46,10 @@ import Mathlib.Tactic.TypeStar
 
 set_option maxSynthPendingDepth 1
 
+-- Use `sheafIsAbelian`, the instance Mathlib's `Sheaf.H` API is stated for, instead of the
+-- definitionally equal `TopCat.Sheaf.instAbelian`: the kernel is slow to identify the two.
+attribute [-instance] TopCat.Sheaf.instAbelian
+
 namespace GroundTheory.Arith.SchemeCoh
 
 open CategoryTheory Opposite TopologicalSpace AlgebraicGeometry Limits
