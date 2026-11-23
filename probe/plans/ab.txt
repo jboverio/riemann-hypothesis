@@ -1,0 +1,27 @@
+sh rm -rf .lake/build
+variant base
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechLeray
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.Linear
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.CechFunctor
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.NaturalLeray
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProjectiveCohomology.PSpaceFinite
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProjectiveCohomology.SerrePAux
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.FormalTower
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.SheafHEquiv
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.AcyclicLeray
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.CohFinite
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.FormalFunctions
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.FormalCompare
+variant pr
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechLeray
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.Linear
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.CechFunctor
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.NaturalLeray
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProjectiveCohomology.PSpaceFinite
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProjectiveCohomology.SerrePAux
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.FormalTower
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.SheafHEquiv
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.AcyclicLeray
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.CohFinite
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.FormalFunctions
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.ProperCohomology.FormalCompare

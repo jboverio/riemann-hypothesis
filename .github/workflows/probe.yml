@@ -1,0 +1,85 @@
+name: probe
+on:
+  push:
+    branches: ['probe/**']
+permissions:
+  contents: read
+concurrency:
+  group: probe-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  plans:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: probe
+      - id: m
+        run: echo "matrix=$(ls probe/plans/*.txt | xargs -n1 basename | sed 's/\.txt$//' | jq -R . | jq -cs .)" >> "$GITHUB_OUTPUT"
+  run:
+    needs: plans
+    runs-on: ubuntu-latest
+    timeout-minutes: 170
+    strategy:
+      fail-fast: false
+      matrix:
+        plan: ${{ fromJson(needs.plans.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            probe
+            src
+      - name: Machine
+        run: |
+          nproc; free -g; df -h /; lscpu | grep 'Model name'
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o "$RUNNER_TEMP/elan-init.sh"
+          sh "$RUNNER_TEMP/elan-init.sh" -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Restore packages
+        id: pkgs
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/packages
+          key: pkgs-v1-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}
+      - name: Mathlib cache
+        if: steps.pkgs.outputs.cache-hit != 'true'
+        run: |
+          MATHLIB_CACHE_GET_URL=https://cache.mathlib.org/mathlib4 lake exe mathlib/cache get
+          du -sh .lake/packages
+      - name: Save packages
+        if: steps.pkgs.outputs.cache-hit != 'true'
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/packages
+          key: pkgs-v1-${{ hashFiles('lake-manifest.json', 'lean-toolchain') }}
+      - name: Restore build
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: build-v1-${{ matrix.plan }}-${{ github.sha }}
+          restore-keys: |
+            build-v1-${{ matrix.plan }}-
+            build-v1-
+      - name: Run plan
+        run: |
+          lake --version
+          bash probe/run.sh probe/plans/${{ matrix.plan }}.txt
+      - name: Save build
+        if: always() && !startsWith(matrix.plan, 'verify')
+        continue-on-error: true
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: build-v1-${{ matrix.plan }}-${{ github.sha }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: probe-${{ matrix.plan }}
+          path: probe-out
+          retention-days: 5
