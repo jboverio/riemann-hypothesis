@@ -1,0 +1,2 @@
+build +GroundTheory.ArithmeticGeometry.SchemeCohomology.CechNaturality.NaturalLeray
+sh lake env lean --profile -Dprofiler.threshold=10 --tstack=400000 -DmaxHeartbeats=4000000 probe/scratch/S2.lean
